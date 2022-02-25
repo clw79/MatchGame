@@ -17,7 +17,7 @@ using System.Windows.Shapes;
 namespace MatchGame
 {
     using System.Windows.Threading;
-    
+
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
@@ -37,14 +37,14 @@ namespace MatchGame
         }
 
         private void Timer_Tick(object sender, EventArgs e)
-        {                       
+        {
             tenthsOfSecondsElapsed++;
             timeTextBlock.Text = (tenthsOfSecondsElapsed / 10F).ToString("0.0s");
             if (matchesFound == 8)
             {
                 timer.Stop();
-                timeTextBlock.Text = timeTextBlock.Text + " - Play Again";            
-                
+                timeTextBlock.Text = timeTextBlock.Text + " -  Click to Play Again";
+
             }
         }
 
@@ -60,7 +60,7 @@ namespace MatchGame
                 "‍F", "‍F",
                 "G", "G",
                 "H","H",
-               
+
             };
 
             Random random = new Random();
@@ -69,10 +69,11 @@ namespace MatchGame
             {
                 if (textBlock.Name != "timeTextBlock")
                 {
-                int index = random.Next(animalEmoji.Count);
-                string nextEmoji = animalEmoji[index];
-                textBlock.Text = nextEmoji;
-                animalEmoji.RemoveAt(index);
+                    int index = random.Next(animalEmoji.Count);
+                    string nextEmoji = animalEmoji[index];
+                    textBlock.Text = nextEmoji;
+                    textBlock.Visibility = Visibility.Visible;
+                    animalEmoji.RemoveAt(index);
                 }
             }
 
@@ -93,7 +94,7 @@ namespace MatchGame
                 textBlock.Visibility = Visibility.Hidden;
                 lastTextBlockClicked = textBlock;
                 findingMatch = true;
-                
+
             }
 
             else if (textBlock.Text == lastTextBlockClicked.Text)
@@ -116,6 +117,6 @@ namespace MatchGame
                 SetUpGame();
             }
         }
-        
+
     }
 }
